@@ -1,0 +1,104 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>ECommerce App</title>
+    <meta charset="utf-8" />
+    <link href="~/assets/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/assets/CSS/myCustomStyle.css" rel="stylesheet" />
+    <link href="~/assets/font-awesome-4.7.0/css/font-awesome.css" rel="stylesheet" />
+</head>
+<body>
+    <!--Start of header-->
+    <header>
+        <button onclick="NavToggle()"><i class="fa fa-bars fa-lg"></i></button>
+        <i class="fa fa-search fa-lg btn-md"></i><input placeholder="Search" style="margin-left:5px" />
+        @*<a href="#" id="hoverToolTip" data-toggle="tooltip" data-placement="bottom" title="View items in cart" style="float:right; margin-right:10px"><i class="fa fa-shopping-cart fa-lg" style="float:right; margin-right:10px"></i></a>*@
+        @Html.Partial("_LoginPartial")
+    </header>
+    <!--End of header-->
+    <!--Start of nav bar-->
+    <nav id="navBar" style="display:none">
+        <div class="SecondNavItem">LOGO</div>
+        <div class="MyCustomNavItem">
+            <a href="https://www.google.com">Watch Day Series </a>
+            <a href="#">Watch Night Series</a>
+            <!--Start of Nav dropdown-->
+            <div class="NavDropdown">
+                <a id="collectionsMenu" onclick="yearToggle()" href="#">Collections  <i class="fa fa-plus-square" id="navIcon"></i></a>
+                <div id="years" style="display:none; text-align:center; font-size:12px">
+                    <a href="#">2016</a>
+                    <a href="#">2015</a>
+                    <a href="#">2014</a>
+                </div>
+            </div>
+            <a href="#">Watch bands</a>
+            <a href="#">Parts</a>
+            <a href="#">Tools</a>
+            <a href="#">Accessories</a>
+        </div>
+        <div>&nbsp</div>
+        <div class="SecondNavItem">
+            <a data-toggle="modal" data-target="#ContactModal" style="outline:0px" href="#">Contact Us</a>
+            <a data-toggle="modal" data-target="#NewsModal" style="outline:0px" href="#">Newsletter</a>
+            <a href="#Subscribe">Subscribe</a>
+        </div>
+    </nav>
+    <!--End of Nav bar-->
+    <!--Contact us Modal-->
+    <div id="ContactModal" class="modal fade" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg" style="text-align:center">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <span class="close" data-dismiss="modal">&times;</span>
+                    <div class="modal-title" style="font-size:28px">
+                        <p>Watches R Us</p>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <p>(555) 555-5555</p>
+                    <p>watches@email.com</p>
+                </div>
+                <div class="modal-footer" style="margin-right:15%; margin-left:15%">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3223.8654058011152!2d-80.07436658425033!3d36.09676888009952!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88530739101f5817%3A0x64583b7d90957128!2sCoder+Foundry!5e0!3m2!1sen!2sus!4v1501273512392" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Newsletter Modal-->
+    <div id="NewsModal" class="modal fade" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="modal-title" style="text-align:center; font-size:28px">
+                        <span class="close" data-dismiss="modal">&times;</span>
+                        Subscribe to our newsletter
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <input style="width:100%; padding:5px" placeholder="Enter E-mail address" />
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-danger">Subscribe</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    @RenderBody()
+    <!--Start of footer-->
+    <footer style="background:black">
+        <center>
+            <div>
+                <p style="color:white">
+                    Powered by <a href="https://www.coderfoundry.com"><img src="~/assets/Images/CFlogo.png" style="height:5%; width:5%" /></a>
+                </p>
+            </div>
+        </center>
+    </footer>
+    <!--End of footer-->
+    <!--Scripts-->
+    <script src="~/assets/scripts/jquery-1.9.1.js"></script>
+    <script src="~/assets/scripts/bootstrap.js"></script>
+    <script src="~/assets/ecommerce.js"></script>
+    @RenderSection("scripts", required: false)
+</body>
+</html>
