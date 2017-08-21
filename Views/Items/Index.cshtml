@@ -1,95 +1,95 @@
 ﻿@model IEnumerable<cwagnerShoppingApp.Models.CodeFirst.Item>
 
 <!--Start of front page displayed watches-->
-<div style="margin-left:200px">
-    <div class="container">
-        <!--large watch picture-->
-        <div class="row LgWatchPic" style="margin-top:30px">
-            <div class="col-md-12">
-                <div>
-                    <p style="color:white; font-size:400%"><b>New arrivals</b></p>
-                    <button>Shop now</button>
-                </div>
-            </div>
-        </div>
-        <!--watches row 1-->
-        <div class="row WatchRow1">
-            @foreach(var item in Model)
-            {
-            <div class="col-sm-3">
-                <div>
-                    <a href="@Url.Action("Details", "Items",  new { id = item.Id })">
-                        <img class="img-responsive" src="@Url.Content(item.MediaURL)" />
-                        <p><b>@item.Name</b></p>
-                        <p>@item.Price</p>
-                    </a>
-                    @if (User.IsInRole("Admin"))
-                    {
-                        @Html.ActionLink("Create New", "Create") <span> | </span>;
-                        @Html.ActionLink("Edit", "Edit", new { id = item.Id }) <span> | </span>;
-                        @Html.ActionLink("Delete", "Delete", new { item = item.Id });
-                        <p><br /></p>;
-                    }
-                </div>
-            </div>
-            }
-        </div>
-        <!--Start of Subscribe block-->
-        <div id="Subscribe" class="row SubscribeDiv">
-            <div class="col-sm-12">
-                <h1>Subscribe</h1>
-                <p>To receive special offers and <span style="color:red">VIP</span> treatment:</p>
-                <input placeholder="Enter e-mail address" />
-                <button style="outline:0px">Subscribe</button>
-            </div>
-        </div>
-        <!--End of Subscribe block-->
-        <!--Start of Contact block-->
-        <div class="row ContactRow">
-            <div class="col-xs-4 ContactUs">
-                <h4><b>Contact Us</b></h4>
-                <p>Questions?  Comments?</p>
-                <input placeholder="Name" />
-                <input placeholder="E-mail" />
-                <input placeholder="Subject" />
-                <input placeholder="Message" />
-                <button style="outline:0px">Send</button>
-            </div>
-            <!--End of Contact block-->
-            <!--Start of About column-->
-            <div class="col-xs-4 AboutUs" style="text-align:center">
-                <h4><b>About</b></h4>
-                <a>About us</a>
-                <a>Employment Opportunities</a>
-                <a>Support</a>
-                <a href="https://goo.gl/maps/PYk2pCYTwZx" target="_blank">Find Us</a>
-                <a>Shipment</a>
-                <a>Payment</a>
-                <a>Credit Card</a>
-                <a>Returns</a>
-                <a>Help</a>
-            </div>
-            <!--End of About column-->
-            <!--Start of Store info column-->
-            <div class="col-xs-4" style="text-align:center">
-                <div>
-                    <h4><b>Store</b></h4>
-                    <p><i class="fa fa-map-marker"> <a href="https://goo.gl/maps/PYk2pCYTwZx" target="_blank" style="color:black">Watches R Us</a></i></p>
-                    <p><i class="fa fa-phone"> (555) 555-5555</i></p>
-                    <p><i class="fa fa-envelope"> watches@email.com</i></p>
-                    <p><br /></p>
-                    <h4><b>We accept</b></h4>
-                    <p><i class="fa fa-cc-amex"> American Express</i></p>
-                    <p><i class="fa fa-cc-visa"> WRU Visa</i></p>
-                    <i class="fa fa-facebook"></i>
-                    <i class="fa fa-instagram"></i>
-                    <i class="fa fa-twitter"></i>
-                    <i class="fa fa-snapchat"></i>
-                    <i class="fa fa-pinterest"></i>
-                </div>
-            </div>
-            <!--End of Store info column-->
+<!--large watch picture-->
+<div class="row LgWatchPic">
+    <div class="col-md-12">
+        <div>
+            <p><b>New arrivals</b></p>
+            <button>Shop now</button>
         </div>
     </div>
+</div>
+<!--watches rows-->
+<div class="CreateNew">
+    @if (User.IsInRole("Admin"))
+    {
+        @Html.ActionLink("Create New", "Create");
+    }
+</div>
+<div class="row WatchRow1">
+    @foreach (var item in Model)
+            {
+                <div class="col-sm-3">
+                    <div>
+                        <a href="@Url.Action("Details", "Items",  new { id = item.Id })">
+                            <img class="img-responsive" src="@Url.Content(item.MediaURL)" />
+                            <p><b>@item.Name</b></p>
+                        </a>
+                        @if (User.IsInRole("Admin"))
+                        {
+                            @Html.ActionLink("Edit", "Edit", new { id = item.Id }) <span> | </span>;
+                            @Html.ActionLink("Delete", "Delete", new { id = item.Id });
+                            <p><br /></p>;
+                        }
+                    </div>
+                </div>
+             }
+</div>
+<!--Start of Subscribe block-->
+<div id="Subscribe" class="row SubscribeDiv">
+    <div class="col-sm-12">
+        <h1>Subscribe</h1>
+        <p>To receive special offers and <span style="color:red">VIP</span> treatment:</p>
+        <input placeholder="Enter e-mail address" />
+        <button style="outline:0px">Subscribe</button>
+    </div>
+</div>
+<!--End of Subscribe block-->
+<!--Start of Contact block-->
+<div class="row ContactRow">
+    <div class="col-xs-4 ContactUs">
+        <h4><b>Contact Us</b></h4>
+        <p>Questions?  Comments?</p>
+        <input placeholder="Name" />
+        <input placeholder="E-mail" />
+        <input placeholder="Subject" />
+        <input placeholder="Message" />
+        <button style="outline:0px">Send</button>
+    </div>
+    <!--End of Contact block-->
+    <!--Start of About column-->
+    <div class="col-xs-4 AboutUs" style="text-align:center">
+        <h4><b>About</b></h4>
+        <a href="@Url.Action("About", "Home")">About us</a>
+        <a>Employment Opportunities</a>
+        <a href="@Url.Action("Contact", "Home")">Support</a>
+        <a href="https://goo.gl/maps/PYk2pCYTwZx" target="_blank">Find Us</a>
+        <a>Shipment</a>
+        <a>Payment</a>
+        <a>Credit Card</a>
+        <a>Returns</a>
+        <a>Help</a>
+    </div>
+    <!--End of About column-->
+    <!--Start of Store info column-->
+    <div class="col-xs-4" style="text-align:center">
+        <div>
+            <h4><b>Store</b></h4>
+            <p><i class="fa fa-map-marker"> <a href="https://goo.gl/maps/PYk2pCYTwZx" target="_blank" style="color:black">Watches R Us</a></i></p>
+            <p><i class="fa fa-phone"> (555) 555-5555</i></p>
+            <p><i class="fa fa-envelope"> watches@email.com</i></p>
+            <p><br /></p>
+            <h4><b>We accept</b></h4>
+            <p><i class="fa fa-cc-amex"> American Express</i></p>
+            <p><i class="fa fa-cc-visa"> WRU Visa</i></p>
+            <i class="fa fa-facebook"></i>
+            <i class="fa fa-instagram"></i>
+            <i class="fa fa-twitter"></i>
+            <i class="fa fa-snapchat"></i>
+            <i class="fa fa-pinterest"></i>
+        </div>
+    </div>
+    <!--End of Store info column-->
 </div>
 <!--End of front page displayed watches-->
