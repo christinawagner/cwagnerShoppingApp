@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace cwagnerShoppingApp.Models.CodeFirst
 {
@@ -15,6 +16,7 @@ namespace cwagnerShoppingApp.Models.CodeFirst
         public decimal Price { get; set; }
         [Required]
         public string MediaURL { get; set; }
+        [AllowHtml]
         public string Description { get; set; }
     }
 }

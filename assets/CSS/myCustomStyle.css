@@ -31,13 +31,9 @@ header button{
 }
 .InnerContent { /*layout formatting for sub-pages*/
     margin-top: 50px;
-    margin-left: 200px;
 }
 .InnerContent img{
     margin-left:180px;
-}
-.InnerContent p{
-    margin-left:50px;
 }
 /*.hoverToolTip{
     color:black;
