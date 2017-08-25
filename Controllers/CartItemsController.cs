@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using cwagnerShoppingApp.Models;
 using cwagnerShoppingApp.Models.CodeFirst;
+using Microsoft.AspNet.Identity;
 
 namespace cwagnerShoppingApp.Controllers
 {
@@ -15,10 +16,25 @@ namespace cwagnerShoppingApp.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
+        public ActionResult CartMenu()
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                var userId = User.Identity.GetUserId();
+                var user = db.Users.Find(userId);
+                var itemCount = user.CartItems.Sum(y => y.Count);
+                return PartialView("_CartMenu", itemCount);
+            }
+            return PartialView("_CartMenu", null);
+        }
+
         // GET: CartItems
+        [Authorize]
         public ActionResult Index()
         {
-            return View(db.CartItems.ToList());
+            var id = User.Identity.GetUserId();
+            var user = db.Users.Find(id);
+            return View(user.CartItems.ToList());
         }
 
         // GET: CartItems/Details/5
@@ -47,16 +63,31 @@ namespace cwagnerShoppingApp.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,ItemId,Count,CreationDate,CustomerId")] CartItem cartItem)
+        public ActionResult Create(int? itemId)
         {
-            if (ModelState.IsValid)
-            {
-                db.CartItems.Add(cartItem);
+            var user = db.Users.Find(User.Identity.GetUserId());
+
+            if (itemId != null || user != null)
+            {                
+                if (db.CartItems.Where(i => i.CustomerId == user.Id).Any(i => i.ItemId == itemId.Value))
+                {
+                    var existingCartItem = db.CartItems.Where(i => i.CustomerId == user.Id).FirstOrDefault(i => i.ItemId == itemId.Value);
+                    existingCartItem.Count++;
+                }
+                else
+                {
+                    CartItem cartItem = new CartItem();
+                    cartItem.ItemId = (int)itemId;
+                    cartItem.CustomerId = user.Id;
+                    cartItem.Count = 1;
+                    cartItem.CreationDate = DateTime.Now;
+                    db.CartItems.Add(cartItem);
+                }
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(cartItem);
+            return View();
         }
 
         // GET: CartItems/Edit/5

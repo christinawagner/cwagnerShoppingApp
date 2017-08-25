@@ -29,6 +29,9 @@ header button{
 .navbar-nav > li > i{
     margin-right:50px;
 }
+#CartItemCounter {
+    right:60px;
+}
 .InnerContent { /*layout formatting for sub-pages*/
     margin-top: 50px;
 }
@@ -86,16 +89,15 @@ nav{
     color: white;
     font-size: 400%
 }
-.LgWatchPic button{
-    background-color:red;
-    border-color:red;
-    color:black;
+.LgWatchPic a{
+    color:white;
+    font-weight:bold;
     font-size:24px;
     padding:5px;
-    outline:none;
+
 }
-.LgWatchPic button:hover{
-    background-color:white;
+.btn:hover{
+    background-color:black;
     border-color:pink;
     color:red;
     cursor:pointer;
@@ -109,6 +111,17 @@ nav{
 .CreateNew a{
     color:black;
 }
+#BuyNowButton input {
+    color:white;
+    background-color: black;
+    border-color:pink;
+    font-weight: bold;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
+#BuyNowButton input:hover{
+    color:red;
+    background-color:white;
+}
 .WatchRow1{
     padding-top:45px;
     padding-left:35px;
@@ -121,11 +134,10 @@ nav{
 .WatchRow1 a{
     color: black;
 }
-/*.WatchRow2{
-    padding-left:35px;
-    padding-bottom:35px;
-    background-color:lightgray;
-}*/
+#CartItemImg img{
+    margin-left:0px;
+    height:25%;
+}
 .SubscribeDiv{
     background-color:black;
     color:white;

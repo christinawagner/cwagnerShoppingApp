@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -49,10 +50,23 @@ namespace cwagnerShoppingApp.Controllers
         [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,CreationDate,UpdatedDate,Name,Price,MediaURL,Description")] Item item)
+        public ActionResult Create([Bind(Include = "Id,Name,Price,Description")] Item item, HttpPostedFileBase image)
         {
+            if (image != null && image.ContentLength > 0)
+            {
+                var ext = Path.GetExtension(image.FileName).ToLower();
+                if (ext != ".png" && ext != ".jpg" && ext != ".jpeg" && ext != ".gif" && ext != ".bmp")
+                {
+                    ModelState.AddModelError("image", "Invalid Format.");
+                }
+            }
             if (ModelState.IsValid)
             {
+                var filePath = "/assets/Images/";
+                var absPath = Server.MapPath("~" + filePath);
+                item.MediaURL = filePath + image.FileName;
+                image.SaveAs(Path.Combine(absPath, image.FileName));
+                item.CreationDate = System.DateTime.Now;
                 db.Items.Add(item);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -83,10 +97,28 @@ namespace cwagnerShoppingApp.Controllers
         [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,CreationDate,UpdatedDate,Name,Price,MediaURL,Description")] Item item)
+        public ActionResult Edit([Bind(Include = "Id,CreationDate,UpdatedDate,Name,Price,MediaURL,Description")] Item item, string mediaURL, HttpPostedFileBase image)
         {
+            var ext = Path.GetExtension(image.FileName).ToLower();
+            if (ext != ".png" && ext != ".jpg" && ext != ".jpeg" && ext != ".gif" && ext != ".bmp")
+            {
+                ModelState.AddModelError("image", "Invalid Format.");
+            }
             if (ModelState.IsValid)
             {
+                if (image != null)
+                {
+                    var filePath = "/assets/Images/";
+                    var absPath = Server.MapPath("~" + filePath);
+                    item.MediaURL = filePath + image.FileName;
+                    image.SaveAs(Path.Combine(absPath, image.FileName));
+                }
+                else
+                {
+                    item.MediaURL = mediaURL;
+                }
+
+                item.UpdatedDate = System.DateTime.Now;
                 db.Entry(item).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -117,6 +149,8 @@ namespace cwagnerShoppingApp.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Item item = db.Items.Find(id);
+            var absPath = Server.MapPath("~" + item.MediaURL);
+            System.IO.File.Delete(absPath);
             db.Items.Remove(item);
             db.SaveChanges();
             return RedirectToAction("Index");

@@ -16,12 +16,12 @@ namespace cwagnerShoppingApp.Models.CodeFirst
         public virtual Item Item { get; set; }
         public virtual ApplicationUser Customer { get; set; }
 
-        public decimal UnitTotal
-        {
-            get
-            {
-                return Count * Item.Price;
-            }
-        }
+        //public decimal UnitTotal
+        //{
+        //    get
+        //    {
+        //        return Count * Item.Price;
+        //    }
+        //}
     }
 }

@@ -6,7 +6,7 @@
     <div class="col-md-12">
         <div>
             <p><b>New arrivals</b></p>
-            <button>Shop now</button>
+            <a href="#Watches" class="btn btn-sm">Shop now</a>
         </div>
     </div>
 </div>
@@ -17,24 +17,35 @@
         @Html.ActionLink("Create New", "Create");
     }
 </div>
-<div class="row WatchRow1">
+<div class="row WatchRow1" id="Watches">
     @foreach (var item in Model)
             {
-                <div class="col-sm-3">
-                    <div>
-                        <a href="@Url.Action("Details", "Items",  new { id = item.Id })">
-                            <img class="img-responsive" src="@Url.Content(item.MediaURL)" />
-                            <p><b>@item.Name</b></p>
-                        </a>
-                        @if (User.IsInRole("Admin"))
-                        {
-                            @Html.ActionLink("Edit", "Edit", new { id = item.Id }) <span> | </span>;
-                            @Html.ActionLink("Delete", "Delete", new { id = item.Id });
-                            <p><br /></p>;
-                        }
-                    </div>
-                </div>
-             }
+        <div class="col-sm-3">
+            <div>
+                <a href="@Url.Action("Details", "Items",  new { id = item.Id })">
+                    <p><b>@item.Name</b></p>
+                    <img class="img-responsive" src="@Url.Content(item.MediaURL)" />
+                </a>
+                <p>$@item.Price</p>
+                @if (Request.IsAuthenticated)
+                {
+                    using (Html.BeginForm("Create", "CartItems", new { itemId = item.Id }, FormMethod.Post, null))
+                    {
+                        @Html.AntiForgeryToken();
+                        <p id="BuyNowButton"><input type="submit" class="btn btn-sm" value="Buy now!" /></p>
+                    }
+                }
+                @*<p>@Html.ActionLink("Buy now!", "AddItemToCart", "CartItems", new { id = item.Id }, null)</p>*@
+                @if (User.IsInRole("Admin"))
+                {
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) <span> | </span>;
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id });
+                    <p><br /></p>;
+                }
+                <p><br /></p>
+            </div>
+        </div>
+    }
 </div>
 <!--Start of Subscribe block-->
 <div id="Subscribe" class="row SubscribeDiv">
