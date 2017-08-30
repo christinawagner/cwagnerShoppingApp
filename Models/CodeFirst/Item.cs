@@ -14,6 +14,7 @@ namespace cwagnerShoppingApp.Models.CodeFirst
         public DateTime? UpdatedDate { get; set; }
         public string Name { get; set; }
         public decimal Price { get; set; }
+        [Display(Name = "Image")]
         public string MediaURL { get; set; }
         [AllowHtml]
         public string Description { get; set; }

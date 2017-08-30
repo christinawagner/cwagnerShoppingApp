@@ -400,6 +400,8 @@
     <Content Include="Scripts\tinymce\skins\lightgray\fonts\tinymce-small.eot" />
     <Content Include="Scripts\tinymce\langs\readme.md" />
     <Content Include="Views\CartItems\_CartMenu.cshtml" />
+    <None Include="Properties\PublishProfiles\cwagner-shopping - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\cwagner-shopping - Web Deploy.pubxml" />
     <None Include="Views\Items\Index.cshtml" />
     <Content Include="assets\scripts\ai.0.22.9-build00167.js" />
     <Content Include="assets\scripts\ai.0.22.9-build00167.min.js" />
@@ -506,6 +508,7 @@
     <Content Include="Views\OrderItems\Details.cshtml" />
     <Content Include="Views\OrderItems\Edit.cshtml" />
     <Content Include="Views\OrderItems\Index.cshtml" />
+    <Content Include="Views\Orders\OrderConfirm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

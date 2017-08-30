@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using cwagnerShoppingApp.Models;
 using cwagnerShoppingApp.Models.CodeFirst;
+using Microsoft.AspNet.Identity;
 
 namespace cwagnerShoppingApp.Controllers
 {
@@ -18,6 +19,8 @@ namespace cwagnerShoppingApp.Controllers
         // GET: OrderItems
         public ActionResult Index()
         {
+            var id = User.Identity.GetUserId();
+            var user = db.Users.Find(id);
             return View(db.OrderItems.ToList());
         }
 
@@ -47,16 +50,32 @@ namespace cwagnerShoppingApp.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,OrderID,ItemId,Quantity,UnitPrice")] OrderItem orderItem)
+        public ActionResult Create(int? itemId)
         {
-            if (ModelState.IsValid)
+            var user = db.Users.Find(User.Identity.GetUserId());
+
+            if (itemId != null || user != null)
             {
-                db.OrderItems.Add(orderItem);
+                if (db.OrderItems != null)
+                {
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    OrderItem orderItem = new OrderItem();
+                    //foreach(itemId in db.CartItems)
+                    //{
+                    //    orderItem.ItemId = (int)itemId;
+                    //    orderItem.CustomerId = user.Id;
+                    //    orderItem.Count = CartItem.Count;
+                    //    orderItem.CreationDate = DateTime.Now;
+                    //}
+                    db.OrderItems.Add(orderItem);
+                }
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-
-            return View(orderItem);
+            return View();
         }
 
         // GET: OrderItems/Edit/5

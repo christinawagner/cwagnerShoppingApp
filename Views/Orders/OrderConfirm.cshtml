@@ -1,0 +1,24 @@
+﻿@model cwagnerShoppingApp.Models.CodeFirst.Order
+
+@{
+    ViewBag.Title = "OrderConfirm";
+}
+
+<div class="InnerContent">
+    <h2>Order Placed</h2>
+    <div>
+        <h4>Thank you for your order!</h4>
+    </div>
+    <div>
+        <p>Your order confirmation number is @Html.DisplayFor(m => m.Id) </p>
+        <p>
+            Your order should arrive within the next 5-7 business days.  Okay, not really.
+            This order did not really ship and will not be arriving.
+            Thank you for testing this portion of the e-commerce site. Cheers.
+        </p>
+    </div>
+    <div>
+        @Html.ActionLink("Return to home", "Index", "Items") |
+        @Html.ActionLink("View past orders", "Index", "Orders")
+    </div>
+</div>

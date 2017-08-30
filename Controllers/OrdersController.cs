@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using cwagnerShoppingApp.Models;
 using cwagnerShoppingApp.Models.CodeFirst;
+using Microsoft.AspNet.Identity;
 
 namespace cwagnerShoppingApp.Controllers
 {
@@ -18,7 +19,7 @@ namespace cwagnerShoppingApp.Controllers
         // GET: Orders
         public ActionResult Index()
         {
-            return View(db.Orders.ToList());
+            return View(db.Orders.Include(o => o.OrderItems).ToList());
         }
 
         // GET: Orders/Details/5
@@ -51,9 +52,27 @@ namespace cwagnerShoppingApp.Controllers
         {
             if (ModelState.IsValid)
             {
+                var userId = User.Identity.GetUserId();
+                var cartItems = db.CartItems.Where(c => c.CustomerId == userId).ToList();
+                order.OrderItems = cartItems.Select(o => new OrderItem
+                {
+                    UnitPrice = o.Item.Price,
+                    Quantity = o.Count,
+                    ItemId = o.ItemId
+                }).ToList();
+
+                order.OrderDate = DateTime.Now;
+                order.CustomerId = userId;
+                order.Total = order.OrderItems.Sum(t => t.Quantity * t.UnitPrice);
+
                 db.Orders.Add(order);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                foreach (var item in cartItems)
+                {
+                    db.CartItems.Remove(item);
+                }
+                db.SaveChanges();
+                return RedirectToAction("Details", "Orders", new { id = order.Id });
             }
 
             return View(order);
@@ -114,6 +133,21 @@ namespace cwagnerShoppingApp.Controllers
             db.Orders.Remove(order);
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        public ActionResult OrderConfirm(bool Completed, int? id)
+        {
+            if(id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+             }
+            Order order = db.Orders.Find(id);
+            if(order != null)
+            {
+                order.Completed = true;
+                db.SaveChanges();
+             }
+            return View(order);
         }
 
         protected override void Dispose(bool disposing)

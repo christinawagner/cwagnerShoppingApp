@@ -9,6 +9,9 @@
 
         <ul class="nav navbar-nav navbar-right">
             <li>
+                @Html.ActionLink("View Order History", "Index", "Orders")
+            </li>
+            <li>
                 <a href="@Url.Action("Index", "CartItems")">
                     <span class="glyphicon glyphicon-shopping-cart"></span>
                 </a>

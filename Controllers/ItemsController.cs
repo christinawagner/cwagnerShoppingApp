@@ -99,10 +99,13 @@ namespace cwagnerShoppingApp.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,CreationDate,UpdatedDate,Name,Price,MediaURL,Description")] Item item, string mediaURL, HttpPostedFileBase image)
         {
-            var ext = Path.GetExtension(image.FileName).ToLower();
-            if (ext != ".png" && ext != ".jpg" && ext != ".jpeg" && ext != ".gif" && ext != ".bmp")
+            if (image != null && image.ContentLength > 0)
             {
-                ModelState.AddModelError("image", "Invalid Format.");
+                var ext = Path.GetExtension(image.FileName).ToLower();
+                if (ext != ".png" && ext != ".jpg" && ext != ".jpeg" && ext != ".gif" && ext != ".bmp")
+                {
+                    ModelState.AddModelError("image", "Invalid Format.");
+                }
             }
             if (ModelState.IsValid)
             {

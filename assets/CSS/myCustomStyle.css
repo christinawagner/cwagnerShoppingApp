@@ -26,8 +26,8 @@ header button{
     background-color:black;
     color:red;
 }
-.navbar-nav > li > i{
-    margin-right:50px;
+.glyphicon {
+    z-index:1;
 }
 #CartItemCounter {
     right:60px;
