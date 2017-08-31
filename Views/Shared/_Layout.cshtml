@@ -12,12 +12,12 @@
     <header>
         <button onclick="NavToggle()"><i class="fa fa-bars fa-lg"></i></button>
         <a href="@Url.Action("Index", "Items")"><i class="glyphicon glyphicon-home"></i></a>"
-        <i class="fa fa-search fa-lg btn-md"></i><input placeholder="Search" style="margin-left:5px" />
+        @*<i class="fa fa-search fa-lg btn-md"></i><input placeholder="Search" style="margin-left:5px" />*@
         @Html.Partial("_LoginPartial")
     </header>
     <!--End of header-->
     <!--Start of nav bar-->
-    <nav id="navBar">
+    <nav id="navBar" class="NoDisplay">
         <div class="SecondNavItem">Watches R Us</div>
         <div class="MyCustomNavItem">
             <a href="https://www.google.com">Watch Day Series </a>            
@@ -26,15 +26,10 @@
             <div class="NavDropdown">
                 <a id="collectionsMenu" onclick="yearToggle()" href="#">Collections  <i class="fa fa-plus-square" id="navIcon"></i></a>
                 <div id="years" style="display:none; text-align:center; font-size:12px">
-                    <a href="#">2016</a>
-                    <a href="#">2015</a>
-                    <a href="#">2014</a>
+                    <a href="#Watches">2017</a>
+                    <a href="#">2018</a>
                 </div>
             </div>
-            <a href="#">Watch bands</a>
-            <a href="#">Parts</a>
-            <a href="#">Tools</a>
-            <a href="#">Accessories</a>
         </div>
         <div>&nbsp</div>
         <div class="SecondNavItem">

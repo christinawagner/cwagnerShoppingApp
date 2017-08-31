@@ -16,11 +16,18 @@
         </div>
         <dl class="dl-horizontal">
             <dt>
-                @Html.DisplayNameFor(model => model.ItemId)
+                @Html.DisplayNameFor(model => model.CreationDate)
             </dt>
 
             <dd>
-                @Html.DisplayFor(model => model.ItemId)
+                @Html.DisplayFor(model => model.CreationDate)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Item.Name)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Item.Name)
             </dd>
 
             <dt>
@@ -30,22 +37,20 @@
             <dd>
                 @Html.DisplayFor(model => model.Count)
             </dd>
-
             <dt>
-                @Html.DisplayNameFor(model => model.CreationDate)
+                @Html.DisplayNameFor(model => model.Item.Price)
             </dt>
-
             <dd>
-                @Html.DisplayFor(model => model.CreationDate)
+                @($"{Model.Item.Price * Model.Count:C}")
             </dd>
 
-            <dt>
+            @*<dt>
                 @Html.DisplayNameFor(model => model.CustomerId)
             </dt>
 
             <dd>
                 @Html.DisplayFor(model => model.CustomerId)
-            </dd>
+            </dd>*@
 
         </dl>
 

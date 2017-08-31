@@ -12,6 +12,13 @@
         <hr />
         <dl class="dl-horizontal">
             <dt>
+                @Html.DisplayNameFor(model => model.OrderDate)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.OrderDate)
+            </dd>
+            <dt>
                 @Html.DisplayNameFor(model => model.Address)
             </dt>
 
@@ -64,24 +71,17 @@
             </dt>
 
             <dd>
-                @Html.DisplayFor(model => model.Total)
+                <p><b>$@Html.DisplayFor(model => model.Total)</b></p>
             </dd>
 
-            <dt>
-                @Html.DisplayNameFor(model => model.OrderDate)
-            </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.OrderDate)
-            </dd>
-
-            <dt>
+            @*<dt>
                 @Html.DisplayNameFor(model => model.CustomerId)
             </dt>
 
             <dd>
                 @Html.DisplayFor(model => model.CustomerId)
-            </dd>
+            </dd>*@
 
             <dt>
                 @Html.DisplayNameFor(model => model.OrderDetails)
@@ -105,7 +105,7 @@
                     @foreach (var orderItem in Model.OrderItems)
                     {
                         <tr>
-                            <td>
+                            <td id="CartItemImg">
                                 <img class="img-responsive" src="@Url.Content(orderItem.Item.MediaURL)" />
                             </td>
                             <td>
@@ -125,18 +125,18 @@
 
         </dl>
     </div>
-    <div>
-        @if (Model.Completed)
+    <div id="ConfirmOrderButton">
+        @if (Model.Completed == false)
         {
-            @Html.ActionLink("Confirm Order", "OrderConfirm", "Orders", new { Completed = true, id = Model.Id }, new { @class = "btn btn-default btn-md disabled" })
+            <p>
+                @Html.ActionLink("Edit Shipping Information", "Edit", new { id = Model.Id }) |
+                @Html.ActionLink("Back to List", "Index")
+                @Html.ActionLink("Confirm Order", "OrderConfirm", "Orders", new { Completed = true, id = Model.Id }, new { @class = "btn btn-default btn-md" })
+            </p>
         }
         else
         {
-        @Html.ActionLink("Confirm Order", "OrderConfirm", "Orders", new { Completed = true, id = Model.Id }, new { @class = "btn btn-default btn-md active" })
-         }
+            @Html.ActionLink("Back to List", "Index")
+        }
     </div>
-    <p>
-        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-        @Html.ActionLink("Back to List", "Index")
-    </p>
 </div>

@@ -19,7 +19,9 @@ namespace cwagnerShoppingApp.Controllers
         // GET: Orders
         public ActionResult Index()
         {
-            return View(db.Orders.Include(o => o.OrderItems).ToList());
+            var id = User.Identity.GetUserId();
+            var user = db.Users.Find(id);
+            return View(user.Orders.OrderByDescending(o => o.OrderDate).ToList());
         }
 
         // GET: Orders/Details/5

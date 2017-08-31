@@ -10,16 +10,16 @@
     <div>
         <h4>Shopping Cart Item</h4>
         <hr />
-        <div>
+        <div id="CartImg">
             <img class="img-responsive" src="@Url.Content(Model.Item.MediaURL)" />
         </div>
         <dl class="dl-horizontal">
             <dt>
-                @Html.DisplayNameFor(model => model.ItemId)
+                @Html.DisplayNameFor(model => model.Item.Name)
             </dt>
 
             <dd>
-                @Html.DisplayFor(model => model.ItemId)
+                @Html.DisplayFor(model => model.Item.Name)
             </dd>
 
             <dt>
@@ -31,25 +31,33 @@
             </dd>
 
             <dt>
+                @Html.DisplayNameFor(model => model.Item.Price)
+            </dt>
+
+            <dd>
+                @($"{Model.Item.Price * Model.Count:C}")
+            </dd>
+
+            @*<dt>
                 @Html.DisplayNameFor(model => model.CreationDate)
             </dt>
 
             <dd>
                 @Html.DisplayFor(model => model.CreationDate)
-            </dd>
+            </dd>*@
 
-            <dt>
+            @*<dt>
                 @Html.DisplayNameFor(model => model.CustomerId)
             </dt>
 
             <dd>
                 @Html.DisplayFor(model => model.CustomerId)
-            </dd>
+            </dd>*@
 
         </dl>
     </div>
     <p>
-        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+        @Html.ActionLink("Change Quantity", "Edit", new { id = Model.Id }) |
         @Html.ActionLink("Back to List", "Index")
     </p>
 </div>

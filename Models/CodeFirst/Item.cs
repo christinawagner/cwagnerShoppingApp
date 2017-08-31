@@ -10,7 +10,9 @@ namespace cwagnerShoppingApp.Models.CodeFirst
     public class Item
     {
         public int Id { get; set; }
+        [Display(Name = "Creation Date")]
         public DateTime CreationDate { get; set; }
+        [Display(Name = "Updated Date")]
         public DateTime? UpdatedDate { get; set; }
         public string Name { get; set; }
         public decimal Price { get; set; }

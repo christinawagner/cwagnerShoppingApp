@@ -1,9 +1,9 @@
 ﻿function NavToggle() {
-    var changeDisplay = document.getElementById("navBar");
-    if (changeDisplay.style.display == "none")
-    { changeDisplay.style.display = "block"; }
+    var changeDisplay = $("#navBar");
+    if (changeDisplay.hasClass("NoDisplay"))
+    { changeDisplay.removeClass("NoDisplay"); }
     else
-    { changeDisplay.style.display = "none"; }
+    { changeDisplay.addClass("NoDisplay"); }
 }
 function yearToggle() {
     var changeYear = document.getElementById("years");

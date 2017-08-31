@@ -23,6 +23,7 @@ namespace cwagnerShoppingApp.Controllers
                 var userId = User.Identity.GetUserId();
                 var user = db.Users.Find(userId);
                 var itemCount = user.CartItems.Sum(y => y.Count);
+                ViewBag.CartHasItems = true;
                 return PartialView("_CartMenu", itemCount);
             }
             return PartialView("_CartMenu", null);
