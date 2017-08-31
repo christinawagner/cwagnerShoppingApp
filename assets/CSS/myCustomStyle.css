@@ -166,20 +166,22 @@ nav{
     border-color:none;
     height:36px;
     width:100%;
+    color:black;
 }
-.SubscribeDiv button{
+.SubscribeDiv input.btn.btn-default{
     background-color:red;
     color:white;
     font-size:18px;
     border-color:red;
     margin-top:10px;
+    width:30%;
 }
-.SubscribeDiv button:hover{
-    background-color:white;
-    color:red;
-    border-color:pink;
-    cursor:pointer;
-}
+.SubscribeDiv input.btn.btn-default:hover {
+    background-color: white;
+    color: red;
+    border-color: pink;
+    cursor: pointer;
+    }
 .ContactRow{
     background-color:lightgray;
     padding-bottom:15px;

@@ -159,6 +159,21 @@ namespace cwagnerShoppingApp.Controllers
             return RedirectToAction("Index");
         }
 
+        public ActionResult DaySeries()
+        {
+            return View();
+        }
+
+        public ActionResult NightSeries()
+        {
+            return View();
+        }
+
+        public ActionResult Collection18()
+        {
+            return View();
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)

@@ -20,22 +20,21 @@
     <nav id="navBar" class="NoDisplay">
         <div class="SecondNavItem">Watches R Us</div>
         <div class="MyCustomNavItem">
-            <a href="https://www.google.com">Watch Day Series </a>            
-            <a href="#">Watch Night Series</a>
+            @Html.ActionLink("Watch Day Series", "DaySeries", "Items")           
+            @Html.ActionLink("Watch Night Series", "NightSeries", "Items")
             <!--Start of Nav dropdown-->
             <div class="NavDropdown">
                 <a id="collectionsMenu" onclick="yearToggle()" href="#">Collections  <i class="fa fa-plus-square" id="navIcon"></i></a>
                 <div id="years" style="display:none; text-align:center; font-size:12px">
-                    <a href="#Watches">2017</a>
-                    <a href="#">2018</a>
-                </div>
+                    <a href="@Url.Action("Index", "Items")#Watches">2017</a>
+                        @Html.ActionLink("2018", "Collection18", "Items")
+</div>
             </div>
         </div>
         <div>&nbsp</div>
         <div class="SecondNavItem">
             <a data-toggle="modal" data-target="#ContactModal" style="outline:0px" href="#">Contact Us</a>
             <a data-toggle="modal" data-target="#NewsModal" style="outline:0px" href="#">Newsletter</a>
-            <a href="#Subscribe">Subscribe</a>
         </div>
     </nav>
     <!--End of Nav bar-->
@@ -70,10 +69,13 @@
                     </div>
                 </div>
                 <div class="modal-body">
+                    @using (Html.BeginForm("Subscribe", "Contact"))
+                    {
                     <input style="width:100%; padding:5px" placeholder="Enter E-mail address" />
-                </div>
-                <div class="modal-footer">
-                    <button class="btn btn-danger">Subscribe</button>
+                    <div class="modal-footer">
+                        <input type="submit" value="Subscribe" class="btn btn-default" />
+                    </div>
+                    }
                 </div>
             </div>
         </div>

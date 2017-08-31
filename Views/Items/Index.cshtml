@@ -34,7 +34,7 @@
                         @Html.AntiForgeryToken();
                         <p id="BuyNowButton"><input type="submit" class="btn btn-sm" value="Buy now!" /></p>
                     }
-                }               
+                }
                 @if (User.IsInRole("Admin"))
                 {
                     @Html.ActionLink("Edit", "Edit", new { id = item.Id }) <span> | </span>;
@@ -51,8 +51,11 @@
     <div class="col-sm-12">
         <h1>Subscribe</h1>
         <p>To receive special offers and <span style="color:red">VIP</span> treatment:</p>
-        <input placeholder="Enter e-mail address" />
-        <button style="outline:0px">Subscribe</button>
+        @using (Html.BeginForm("Subscribe", "Contact"))
+        {
+            <input placeholder="Enter e-mail address" />
+            <input type="submit" value="Subscribe" class="btn btn-default" />
+        }
     </div>
 </div>
 <!--End of Subscribe block-->
@@ -61,25 +64,23 @@
     <div class="col-xs-4 ContactUs">
         <h4><b>Contact Us</b></h4>
         <p>Questions?  Comments?</p>
-        <input placeholder="Name" />
-        <input placeholder="E-mail" />
-        <input placeholder="Subject" />
-        <input placeholder="Message" />
-        <button style="outline:0px">Send</button>
+        @using (Html.BeginForm("Index", "Contact"))
+        {
+            <input placeholder="Name" />
+            <input placeholder="E-mail" />
+            <input placeholder="Subject" />
+            <input placeholder="Message" />
+            <input type="submit" value="Send" class="btn btn-default" />
+        }
     </div>
     <!--End of Contact block-->
     <!--Start of About column-->
     <div class="col-xs-4 AboutUs" style="text-align:center">
         <h4><b>About</b></h4>
         <a href="@Url.Action("About", "Home")">About us</a>
-        <a>Employment Opportunities</a>
+        @Html.ActionLink("Employment Opportunities", "Employment", "Contact")
         <a href="@Url.Action("Contact", "Home")">Support</a>
         <a href="https://goo.gl/maps/PYk2pCYTwZx" target="_blank">Find Us</a>
-        <a>Shipment</a>
-        <a>Payment</a>
-        <a>Credit Card</a>
-        <a>Returns</a>
-        <a>Help</a>
     </div>
     <!--End of About column-->
     <!--Start of Store info column-->

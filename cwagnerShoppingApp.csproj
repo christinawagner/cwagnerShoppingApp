@@ -191,6 +191,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CartItemsController.cs" />
+    <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ItemsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -402,6 +403,11 @@
     <Content Include="Views\CartItems\_CartMenu.cshtml" />
     <None Include="Properties\PublishProfiles\cwagner-shopping - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\cwagner-shopping - Web Deploy.pubxml" />
+    <Content Include="Views\Contact\Index.cshtml" />
+    <Content Include="Views\Items\DaySeries.cshtml" />
+    <Content Include="Views\Items\Collection18.cshtml" />
+    <Content Include="Views\Contact\Employment.cshtml" />
+    <Content Include="Views\Contact\Subscribe.cshtml" />
     <None Include="Views\Items\Index.cshtml" />
     <Content Include="assets\scripts\ai.0.22.9-build00167.js" />
     <Content Include="assets\scripts\ai.0.22.9-build00167.min.js" />
@@ -509,6 +515,7 @@
     <Content Include="Views\OrderItems\Edit.cshtml" />
     <Content Include="Views\OrderItems\Index.cshtml" />
     <Content Include="Views\Orders\OrderConfirm.cshtml" />
+    <Content Include="Views\Items\NightSeries.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
